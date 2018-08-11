@@ -20,14 +20,14 @@ RUN apk update && \
 
 RUN mkdir /mnt/mnt_point
 
-ENV MOUNT_DIR /mnt/mnt_point \
-    ENDPOINT eu-west-1 \
-    BUCKET my-bucket \
-    STAT_CACHE_TTL 1m0s \
-    TYPE_CACHE_TTL 1m0s \
-    DIR_MODE 0755 \
-    FILE_MODE 0644 \
-    PROFILE default
+ENV MOUNT_DIR=/mnt/mnt_point \
+    ENDPOINT=eu-west-1 \
+    BUCKET=my-bucket \
+    STAT_CACHE_TTL=1m0s \
+    TYPE_CACHE_TTL=1m0s \
+    DIR_MODE=0755 \
+    FILE_MODE=0644 \
+    PROFILE=default
 
 ADD ./bin/run.sh /root/run.sh
 
