@@ -7,11 +7,12 @@ RUN apk update && \
     # Goofys
     go get github.com/kahing/goofys && \
     go install github.com/kahing/goofys && \
+    strip bin/goofys && \
     # clear cache
     apk del --purge gcc git && \
     rm -rf /var/cache/apk/* /usr/local/share/man /var/rmp/* && \
     # remove goofys dir
-    rm -rf go && \
+    rm -rf src/* && \
     # add syslog-ng (syslog required by Goofys)
     echo "@version: 3.8" > /etc/syslog-ng/syslog-ng.conf && \
     echo "source s_local {internal();network(transport("udp"));unix-dgram("/dev/log");};" >> /etc/syslog-ng/syslog-ng.conf && \
