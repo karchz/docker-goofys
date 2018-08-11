@@ -3,7 +3,7 @@ FROM golang:1.10-alpine
 LABEL MAINTAINER kometchtech <kometch@gmail.com>
 
 RUN apk update && \
-    apk add syslog-ng gcc ca-certificates openssl musl-dev git fuse &&\
+    apk add gcc ca-certificates openssl musl-dev git fuse &&\
     # Goofys
     go get github.com/kahing/goofys && \
     go install github.com/kahing/goofys && \
@@ -12,12 +12,12 @@ RUN apk update && \
     apk del --purge gcc git && \
     rm -rf /var/cache/apk/* /usr/local/share/man /var/rmp/* && \
     # remove goofys dir
-    rm -rf src/* && \
+    rm -rf src/* && 
     # add syslog-ng (syslog required by Goofys)
-    echo "@version: 3.8" > /etc/syslog-ng/syslog-ng.conf && \
-    echo "source s_local {internal();network(transport("udp"));unix-dgram("/dev/log");};" >> /etc/syslog-ng/syslog-ng.conf && \
-    echo "destination d_local {file("/var/log/messages");};" >> /etc/syslog-ng/syslog-ng.conf && \
-    echo "log {source(s_local);destination(d_local);};" >> /etc/syslog-ng/syslog-ng.conf
+    #echo "@version: 3.8" > /etc/syslog-ng/syslog-ng.conf && \
+    #echo "source s_local {internal();network(transport("udp"));unix-dgram("/dev/log");};" >> /etc/syslog-ng/syslog-ng.conf && \
+    #echo "destination d_local {file("/var/log/messages");};" >> /etc/syslog-ng/syslog-ng.conf && \
+    #echo "log {source(s_local);destination(d_local);};" >> /etc/syslog-ng/syslog-ng.conf
 
 RUN mkdir /mnt/mnt_point
 
